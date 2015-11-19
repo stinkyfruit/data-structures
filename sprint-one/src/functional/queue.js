@@ -3,6 +3,8 @@ var Queue = function(){
 
   // Use an object with numeric keys to store values
   var storage = {};
+  var firstElementIndex = 0;
+  var count = 0;  
 
   // Implement the methods below
 // storage = {0:a,1:b,2:c}
@@ -12,29 +14,31 @@ var Queue = function(){
 // storage[0] = storage[1] -> [1,1,2,3,4,5]
 // i = 1
 // storage[1] = storage[2] -> [1,2,2,3,4,5]
-// 
-// someInstance
-// stack1.storage ={}
-//stack1.push('a') -> {'a'}
-// stack2.storage = {1,2,3,4}
-// stack2.push('a')- >[1,2,3,4,'a']
-// 
+//storage[0]
+// [a,b,c,d,e]
+// delete storage[firstElementIndex]
+// delete storage[0] -> [b,c,d,e] storage[1] = b
+// [0,0,0,a,b,c,d] -> firstElementIndex = 3, count = 4
+// storage[4] = 'new element'
+
 
   someInstance.enqueue = function(value){
-    storage[someInstance.size()] = value;
+    storage[firstElementIndex + count] = value;
+    count++;
   };
 
   someInstance.dequeue = function(){
-    var temp = storage[0];
-    for(var i = 0; i < someInstance.size(); i++) {
-      storage[i] = storage[i + 1];
+    if(count !== 0) {
+      var temp = storage[firstElementIndex];
+      delete storage[firstElementIndex];
+      firstElementIndex++;
+      count--;
+      return temp;
     }
-    delete storage[someInstance.size() - 1];
-    return temp;
   };
 
   someInstance.size = function(){
-    return Object.keys(storage).length;
+    return count;
   };
 
   return someInstance;
