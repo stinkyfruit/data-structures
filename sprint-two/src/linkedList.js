@@ -4,8 +4,7 @@ var LinkedList = function(){
   list.tail = null;
 
   list.addToTail = function(value){
-    //create new node that will be the new tail
-    //create node
+    //O(1)
     var newNode = Node(value);
     if(list.head === null) {
       list.head = newNode;
@@ -21,12 +20,14 @@ var LinkedList = function(){
   };
 
   list.removeHead = function(){
+    //O(1)
     var oldHead = list.head;
     list.head = list.head.next;
     return oldHead.value;
   };
 
   list.contains = function(target, node){
+    //O(n)
     node = node || this.head;
     if (node.value === target) {
       return true;
